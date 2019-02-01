@@ -25,11 +25,12 @@ if __name__ =='__main__':
 
 class Root(object):
 
-    def __init__(self,url,local=None):
+    def __init__(self,url=None,local=None):
 
         self.url=url
         self.local=local
-        self.host=self.url.rsplit('/',1)[0]
+        if local is None:
+            self.host=self.url.rsplit('/',1)[0]
         self.get_html()
         self.get_root()
         # self.get_soup()
@@ -80,7 +81,7 @@ class Root(object):
     def tostring(self,element):
         ##解析的html最好为unicode编码，否则会乱码
 
-        return etree.tostring(element)
+        return etree.tostring(element,encoding = "unicode", pretty_print = True, method = "html")
 
 
 
